@@ -38,7 +38,7 @@ public class SpaceMain {
 		DrawingPanel() {
 			this.setBackground(Color.BLACK);
 			this.setPreferredSize(new Dimension(panW, panH));
-			this.addKeyListener(this);
+			this.addKeyListener(new BetterKeyListener());
 			this.setFocusable(true); //needed for JPanel and keys
 		}
 		
@@ -59,6 +59,26 @@ public class SpaceMain {
 
 		@Override
 		public void keyReleased(KeyEvent e) {}
+	}
+	
+	class BetterKeyListener implements KeyListener {
+		private boolean keysDown[] = new boolean[256];
+		
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() < 256) keysDown[e.getKeyCode()] = true;
+			
+			player.move(e.getKeyCode());
+			panel.repaint();
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+		}
 	}
 
 }
