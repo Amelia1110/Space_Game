@@ -3,6 +3,8 @@ package game;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -32,10 +34,12 @@ public class SpaceMain {
 		//timer.start();
 	}
 	
-	class DrawingPanel extends JPanel {
+	class DrawingPanel extends JPanel implements KeyListener{
 		DrawingPanel() {
 			this.setBackground(Color.BLACK);
 			this.setPreferredSize(new Dimension(panW, panH));
+			this.addKeyListener(this);
+			this.setFocusable(true); //needed for JPanel and keys
 		}
 		
 		public void paintComponent(Graphics g) {
@@ -43,6 +47,22 @@ public class SpaceMain {
 			g.setColor(player.clr);
 			g.fillRect(player.x, player.y, player.width, player.height);
 		}
+		
+		@Override
+		public void keyTyped(KeyEvent e) {
+			if (e.getKeyCode() == 'W') {
+				player.yy -= player.vy; // Uses doubles for all position
+				player.y = (int) player.yy;
+			}
+			
+			this.repaint();
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {}
+
+		@Override
+		public void keyReleased(KeyEvent e) {}
 	}
 
 }
