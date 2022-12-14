@@ -50,11 +50,7 @@ public class SpaceMain {
 		
 		@Override
 		public void keyTyped(KeyEvent e) {
-			if (e.getKeyCode() == 'W') {
-				player.yy -= player.vy; // Uses doubles for all position
-				player.y = (int) player.yy;
-			}
-			
+			player.move(e.getKeyCode());
 			this.repaint();
 		}
 
