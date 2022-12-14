@@ -34,7 +34,7 @@ public class SpaceMain {
 		//timer.start();
 	}
 	
-	class DrawingPanel extends JPanel implements KeyListener{
+	class DrawingPanel extends JPanel {
 		DrawingPanel() {
 			this.setBackground(Color.BLACK);
 			this.setPreferredSize(new Dimension(panW, panH));
@@ -47,18 +47,6 @@ public class SpaceMain {
 			g.setColor(player.clr);
 			g.fillRect(player.x, player.y, player.width, player.height);
 		}
-		
-		@Override
-		public void keyTyped(KeyEvent e) {
-			player.move(e.getKeyCode());
-			this.repaint();
-		}
-
-		@Override
-		public void keyPressed(KeyEvent e) {}
-
-		@Override
-		public void keyReleased(KeyEvent e) {}
 	}
 	
 	class BetterKeyListener implements KeyListener {
