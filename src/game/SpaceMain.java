@@ -34,11 +34,11 @@ public class SpaceMain {
 		//timer.start();
 	}
 	
-	class DrawingPanel extends JPanel implements KeyListener{
+	class DrawingPanel extends JPanel {
 		DrawingPanel() {
 			this.setBackground(Color.BLACK);
 			this.setPreferredSize(new Dimension(panW, panH));
-			this.addKeyListener(this);
+			this.addKeyListener(new BetterKeyListener());
 			this.setFocusable(true); //needed for JPanel and keys
 		}
 		
@@ -47,18 +47,26 @@ public class SpaceMain {
 			g.setColor(player.clr);
 			g.fillRect(player.x, player.y, player.width, player.height);
 		}
+	}
+	
+	class BetterKeyListener implements KeyListener {
+		private boolean keysDown[] = new boolean[256];
 		
 		@Override
-		public void keyTyped(KeyEvent e) {
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() < 256) keysDown[e.getKeyCode()] = true;
+			
 			player.move(e.getKeyCode());
-			this.repaint();
+			panel.repaint();
 		}
 
 		@Override
-		public void keyPressed(KeyEvent e) {}
+		public void keyTyped(KeyEvent e) {
+		}
 
 		@Override
-		public void keyReleased(KeyEvent e) {}
+		public void keyReleased(KeyEvent e) {
+		}
 	}
 
 }
