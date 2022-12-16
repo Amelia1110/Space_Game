@@ -2,6 +2,11 @@ package game;
 
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 class SpaceShip extends Rectangle {
 	// Note: x, y, width, height (all ints) come from Rectangle
@@ -10,8 +15,17 @@ class SpaceShip extends Rectangle {
 	double vx = 3.5;
 	double vy = 3.5;
 	Color clr = Color.GREEN; // TODO: make the enemy one a different colour
+	BufferedImage img;
 	
 	SpaceShip() {
+		try {
+			img = ImageIO.read(new File("krakenSM.png"));
+			width = img.getWidth();
+			height = img.getHeight();
+		} catch (IOException e) {
+			System.out.println("Warning: gitkrakenSM.png failed to load");
+		}		
+		
 		xx = 200.0;
 		yy = 700.0;
 		
