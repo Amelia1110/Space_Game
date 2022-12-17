@@ -50,14 +50,21 @@ class SpaceShip extends Rectangle{
 			xx +=vx; break;
 		}
 		// wrap around on the screen
-		if (xx < 0) xx = SpaceMain.panW;
-		if (yy < 0) yy = SpaceMain.panH;
+		if (xx < 0 - width) xx = SpaceMain.panW;
+		if (yy < 0 - height) yy = SpaceMain.panH;
 		if (xx > SpaceMain.panW) xx = 0;
 		if (yy > SpaceMain.panH) yy = 0;
 		
 		//update final positions
 		x = (int)xx;
 		y = (int)yy;
+	}
+
+	//Laser must be returned so that it can be added to the arraylist
+	Laser shoot() {	
+		//laser constructor gets the (x,y) where it should start
+		Laser z = new Laser(this.x + this.width/2, this.y + 10);
+		return z;
 	}
 	
 }
